@@ -1,0 +1,251 @@
+<html>	
+	<head>
+		<meta charset="utf-8">
+		<title>Frameworks Benchmark </title>
+	    <!-- Bootstrap -->    
+	    <script src="js/chart.min.js"></script>
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>	
+	<body>		
+		<div class="main_page" style="padding:50px; padding-top:0px; max-width:1000px; margin: 0 auto;">
+
+		<p align="center"><h2>Performance benchmark of the game frameworks</h2></p>
+		<div class="panel panel-info">
+			<div class="panel-heading">			
+			</div>		
+			<div class="panel-body">
+				<p>
+					Here is my simple test of the game frameworks performance.<br>
+					I used OpenFL’s <a class="text-info" href="https://github.com/openfl/openfl-samples/tree/master/demos/BunnyMark">BunnyMark</a> for that, but I had removed all data except the jumping bunnies.<br>
+					So, this test is just a moving sprites without alpha, scale and rotation.		
+				</p>				
+				<p>
+					Here is you can check charts and see how much sprites I got at <b class="text-warning">60 fps</b> on Windows <b class="text-warning">(executable)</b> platform with the different frameworks.
+					<div class="text-danger">Test machine is:</div> <b>Windows 8.1, i5 4690, gtx970</b><br><br>					
+				</p>
+				<p>
+					For rendering bunnies I use:<br>					
+					<ul class="list-group">
+						<li class="list-group-item">OpenFL, NME - <a class="text-warning" href="#">Tilesheet</a></li>
+						<li class="list-group-item">Kha - <a class="text-warning" href="#">Image</a></li>
+						<li class="list-group-item">Monogame, XNA, LibGDX - <a class="text-warning" href="#">Texture</a></li>						
+					</ul>					
+				</p>			
+
+				<p align="center"><h3>Table</h3></p>
+				<table class="table table-striped table-hover">
+				  <thead>
+				    <tr>
+				      <th>#</th>
+				      <th>Framework</th>
+				      <th>Count of bunnies / 60 fps</th>
+				      <th>Language</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <td>1</td>
+				      <td>Orx</td>
+				      <td>500 000</td>
+				      <td>C++</td>
+				    </tr>					  	
+				    <tr>
+				      <td>2</td>
+				      <td>Kha</td>
+				      <td>408 000</td>
+				      <td>Haxe</td>
+				    </tr>
+				    <tr>
+				      <td>3</td>
+				      <td>OpenFL 3.4.0</td>
+				      <td>382 000</td>
+				      <td>Haxe</td>
+				    </tr>		
+					<tr>
+				      <td>4</td>
+				      <td>NME 5.6.2</td>
+				      <td>352 000</td>
+				      <td>Haxe</td>
+				    </tr> 
+				    <tr>
+				      <td>5</td>
+				      <td>LibGDX 1.6.1</td>
+				      <td>303 000</td>
+				      <td>Java</td>
+				    </tr>
+				    <tr>
+				      <td>6</td>
+				      <td>XNA</td>
+				      <td>225 000</td>
+				      <td>C#</td>
+				    </tr>
+				    <tr>
+				      <td>7</td>
+				      <td>MonoGame DirectX 3.4</td>
+				      <td>120 000</td>
+				      <td>C#</td>
+				    </tr>					    
+				    <tr>
+				      <td>8</td>
+				      <td>OpenFL 3.4.0 Legacy</td>
+				      <td>130 000</td>
+				      <td>Haxe</td>
+				    </tr>				    
+				    				   
+				    <tr>
+				    <td>9</td>
+				      <td>MonoGame OpenGL 3.4</td>
+				      <td>101 000</td>
+				      <td>C#</td>
+				    </tr>
+				  </tbody>
+				</table> 
+
+			<p align="center"><h3>Charts</h3></p>
+			<p align="center">			
+				<canvas id="bar_chart" style="width:800px;"></canvas>
+			</p>
+			<br>
+			<p align="center">
+				Thanks for whatching! Leave the comments and share link to your friends :)
+			</p>
+			<p>
+				<br>
+				<p>Sources:</p>
+				<a class="text-info" href="https://github.com/dmitryhryppa/Frameworks_test">https://github.com/dmitryhryppa/Frameworks_test</a><br>	
+			</p>
+			<p>
+				<br>
+				<p>Links:</p>				
+				<a class="text-info" href="https://github.com/nmehost">NME - https://github.com/nmehost</a><br>
+				<a class="text-info" href="http://openfl.org/">OpenFL - http://openfl.org</a><br>
+				<a class="text-info" href="https://github.com/KTXSoftware/Kha">Kha - https://github.com/KTXSoftware/Kha</a><br>
+				<a class="text-info" href="http://monogame.net/">MonoGame - http://www.monogame.net/</a><br>
+				<a class="text-info" href="https://libgdx.badlogicgames.com/">LibGDX - https://libgdx.badlogicgames.com/</a><br>
+				<a class="text-info" href="http://orx-project.org/">Orx Project - http://orx-project.org/</a><br>
+			</p>
+			<script>
+				var orx = 500000;
+				var nme = 352000;
+				var openfl = 382000;
+				var openfl_legacy = 130000;
+				var kha = 408000;
+				var monogame_dx = 120000;
+				var monogame_gl = 101000;
+				var xna = 225000;
+				var libgdx = 303000;
+
+				var bar_data = {
+				    labels: ["NME 5.6.2", "OpenFL 3.4.0", "OpenFL 3.4.0 Legacy", "Kha", "MonoGame OpenGL 3.4", "MonoGame DirectX 3.4", "XNA", "LibGDX 1.6.1", "Orx"],
+				    datasets: [
+				        {			            
+				        	fillColor: "#b70000",   
+				            data: [nme, openfl, openfl_legacy, kha, monogame_gl, monogame_dx, xna, libgdx, orx]
+				        }			        
+				    ]
+				};	
+
+
+				var pie_data = [
+				    {
+				        value: nme,
+				        color:"#607d8b",			        
+				        label: "NME 5.6.2"
+				    },				
+				    {
+				        value: openfl,
+				        color:"#4caf50",			        
+				        label: "OpenFL 3.4.0"
+				    },
+				    {
+				        value: openfl_legacy,
+				        color: "#8bc34a",			        
+				        label: "OpenFL 3.4.0 Legacy"
+				    },
+				    {
+				        value: kha,
+				        color: "#009688",			        
+				        label: "Kha"
+				    },
+				    {
+				        value: monogame_gl,
+				        color: "#ff9800",			        
+				        label: "MonoGame OpenGL 3.4"
+				    },
+				    {
+				        value: monogame_dx,
+				        color: "#ff5722",			        
+				        label: "MonoGame DirectX 3.4"
+				    },
+				    {
+				        value: xna,
+				        color: "#2196f3",			        
+				        label: "XNA"
+				    },
+				    {
+				        value: libgdx,
+				        color: "#795548",			        
+				        label: "LibGDX 1.6.1"			        
+				    },
+				    {
+				        value: orx,
+				        color: "#2c3e50",			        
+				        label: "Orx"			        
+				    }				    
+				];
+				
+				var barChart = new Chart(document.getElementById("bar_chart").getContext("2d")).Bar(bar_data);			
+			</script>
+
+			</div>
+		</div>	
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title"></h3>
+			</div>		
+			<div class="panel-body">			
+				<div id="disqus_thread"></div>
+				<script type="text/javascript">
+				    /* * * CONFIGURATION VARIABLES * * */
+				    var disqus_shortname = 'themozokteam';
+				    
+				    /* * * DON'T EDIT BELOW THIS LINE * * */
+				    (function() {
+				        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+				        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+				    })();
+				</script>
+			</div>
+		</div>
+
+		</div> <!--end main page-->    
+
+		<script type="text/javascript">
+		    /* * * CONFIGURATION VARIABLES * * */
+		    var disqus_shortname = 'themozokteam';
+		    
+		    /* * * DON'T EDIT BELOW THIS LINE * * */
+		    (function () {
+		        var s = document.createElement('script'); s.async = true;
+		        s.type = 'text/javascript';
+		        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+		        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+		    }());
+		</script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-65989961-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>	    
+	    
+	</body>
+</html>
